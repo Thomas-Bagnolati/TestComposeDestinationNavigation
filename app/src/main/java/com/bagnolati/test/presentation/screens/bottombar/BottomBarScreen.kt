@@ -23,7 +23,6 @@ import com.google.accompanist.navigation.material.ExperimentalMaterialNavigation
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
 import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.navigateTo
 import com.ramcosta.composedestinations.spec.DirectionDestinationSpec
@@ -38,9 +37,9 @@ fun BottomBarScreen(
 ) {
     val navHostEngine = rememberAnimatedNavHostEngine()
     val navController = navHostEngine.rememberNavController()
+
     Scaffold(
         topBar = {
-
         },
         bottomBar = {
             BottomNavigationBar(navController)
@@ -55,7 +54,7 @@ fun BottomBarScreen(
 
 }
 
-@BottomBarNavGraph(true)
+@BottomBarNavGraph(start = true)
 @Destination
 @Composable
 fun HomeScreen(
@@ -64,8 +63,8 @@ fun HomeScreen(
     Text(text = "HomeScreen")
 }
 
-@Destination()
 @BottomBarNavGraph
+@Destination
 @Composable
 fun MusicScreen(
     navigator: DestinationsNavigator,
@@ -82,8 +81,8 @@ fun MoviesScreen(
     Text(text = "MoviesScreen")
 }
 
-@Destination()
 @BottomBarNavGraph
+@Destination
 @Composable
 fun BooksScreen(
     navigator: DestinationsNavigator,
