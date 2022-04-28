@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.bagnolati.test.common.DestinationAnimationStyle
 import com.bagnolati.test.model.Card
+import com.bagnolati.test.navigation.DestinationAnimationStyle
 import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination(style = DestinationAnimationStyle::class)

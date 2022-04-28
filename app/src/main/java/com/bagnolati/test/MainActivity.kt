@@ -20,14 +20,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val navHostEngine = rememberAnimatedNavHostEngine()
             TestTheme {
-                val navHostEngine = rememberAnimatedNavHostEngine()
-
                 Surface(color = Color.White) {
-
-                    DestinationsNavHost(
-                        navGraph = NavGraphs.root,
-                        engine = navHostEngine)
+                    DestinationsNavHost(navGraph = NavGraphs.main, engine = navHostEngine)
                 }
 
             }

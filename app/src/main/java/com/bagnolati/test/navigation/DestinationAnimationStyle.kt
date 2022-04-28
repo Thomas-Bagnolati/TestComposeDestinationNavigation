@@ -1,8 +1,9 @@
-package com.bagnolati.test.common
+package com.bagnolati.test.navigation
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
 import androidx.navigation.NavBackStackEntry
+import com.bagnolati.test.presentation.screens.NavGraphs
 import com.bagnolati.test.presentation.screens.appDestination
 import com.ramcosta.composedestinations.spec.DestinationStyle
 
@@ -10,25 +11,25 @@ import com.ramcosta.composedestinations.spec.DestinationStyle
 object DestinationAnimationStyle : DestinationStyle.Animated {
 
     override fun AnimatedContentScope<NavBackStackEntry>.enterTransition(): EnterTransition {
-        return when (initialState.appDestination()) {
+        return when (initialState.appDestination(NavGraphs.main)) {
             else -> SlideInOpen
         }
     }
 
     override fun AnimatedContentScope<NavBackStackEntry>.exitTransition(): ExitTransition {
-        return when (targetState.appDestination()) {
+        return when (targetState.appDestination(NavGraphs.main)) {
             else -> SlideOutClose
         }
     }
 
     override fun AnimatedContentScope<NavBackStackEntry>.popEnterTransition(): EnterTransition {
-        return when (initialState.appDestination()) {
+        return when (initialState.appDestination(NavGraphs.main)) {
             else -> SlideInClose
         }
     }
 
     override fun AnimatedContentScope<NavBackStackEntry>.popExitTransition(): ExitTransition {
-        return when (targetState.appDestination()) {
+        return when (targetState.appDestination(NavGraphs.main)) {
             else -> SlideOutOpen
         }
     }
