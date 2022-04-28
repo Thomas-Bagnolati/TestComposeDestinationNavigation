@@ -23,6 +23,7 @@ import com.google.accompanist.navigation.material.ExperimentalMaterialNavigation
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.manualcomposablecalls.composable
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.navigateTo
 import com.ramcosta.composedestinations.spec.DirectionDestinationSpec
@@ -30,10 +31,11 @@ import com.ramcosta.composedestinations.spec.NavHostEngine
 
 
 @OptIn(ExperimentalAnimationApi::class, ExperimentalMaterialNavigationApi::class)
-@Composable
 @MainNavGraph(start = true)
 @Destination
+@Composable
 fun BottomBarScreen(
+    outerNavController: NavController,
 ) {
     val navHostEngine = rememberAnimatedNavHostEngine()
     val navController = navHostEngine.rememberNavController()
@@ -48,10 +50,10 @@ fun BottomBarScreen(
         Navigation(
             modifier = Modifier.padding(paddingValues),
             navController = navController,
-            engine = navHostEngine
+            engine = navHostEngine,
+            outerNavController = outerNavController
         )
     }
-
 }
 
 @BottomBarNavGraph(start = true)
@@ -85,13 +87,16 @@ fun MoviesScreen(
 @Destination
 @Composable
 fun BooksScreen(
-    navigator: DestinationsNavigator,
+    outerNavController: NavController,
 ) {
     Column {
         Text(text = "BooksScreen")
 
         Button(
-            onClick = { navigator.navigate(CardListScreenDestination) }
+            onClick = {
+                // navigator.navigate(CardListScreenDestination)
+                outerNavController.navigateTo(CardListScreenDestination)
+            }
         ) {
             Text("Go to CardListScreen")
         }
@@ -145,13 +150,16 @@ fun Navigation(
     modifier: Modifier = Modifier,
     navController: NavHostController,
     engine: NavHostEngine,
+    outerNavController: NavController,
 ) {
     DestinationsNavHost(
         modifier = modifier,
         engine = engine,
         navController = navController,
         navGraph = NavGraphs.bottomBar,
-    )
+    ) {
+        composable(BooksScreenDestination) { BooksScreen(outerNavController = outerNavController) }
+    }
 }
 
 enum class NavigationItem(val direction: DirectionDestinationSpec, val icon: Int, val title: String) {

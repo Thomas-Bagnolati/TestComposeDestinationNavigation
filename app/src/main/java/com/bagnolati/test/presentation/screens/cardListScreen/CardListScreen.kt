@@ -16,9 +16,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bagnolati.test.model.Card
 import com.bagnolati.test.navigation.DestinationAnimationStyle
+import com.bagnolati.test.navigation.MainNavGraph
 import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination(style = DestinationAnimationStyle::class)
+@MainNavGraph
 @Composable
 fun CardListScreen(
     viewModel: CardListViewModel = hiltViewModel(),
